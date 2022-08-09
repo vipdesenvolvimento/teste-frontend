@@ -2,9 +2,7 @@ import React from 'react';
 
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
 import ListLeadComponent from './components/ListLeadComponent';
-import HeaderComponent from './components/HeaderComponent';
 import CreateLeadComponent from './components/CreateLeadComponent';
 import ViewLeadComponent from './components/ViewLeadComponent';
 

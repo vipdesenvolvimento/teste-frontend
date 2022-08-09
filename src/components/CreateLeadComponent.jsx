@@ -6,22 +6,20 @@ class CreateLeadComponent extends Component {
         super(props)
 
         this.state = {
-            // step 2
             id: this.props.match.params.id,
             nome: '',
             sobrenome: '',
             data_nascimento: '',
             telefone: ''
         }
+        
         this.changeNomeHandler = this.changeNomeHandler.bind(this);
         this.changeSobrenomeHandler = this.changeSobrenomeHandler.bind(this);
         this.saveOrUpdateLead = this.saveOrUpdateLead.bind(this);
     }
-
-    // step 3
+    
     componentDidMount(){
 
-        // step 4
         if(this.state.id === '_add'){
             return
         }else{
@@ -38,9 +36,7 @@ class CreateLeadComponent extends Component {
     saveOrUpdateLead = (e) => {
         e.preventDefault();
         let lead = {nome: this.state.nome, sobrenome: this.state.nome, data_nascimento: this.state.data_nascimento, telefone: this.state.telefone};
-        console.log('lead => ' + JSON.stringify(lead));
 
-        // step 5
         if(this.state.id === '_add'){
             LeadService.createLead(lead).then(res =>{
                 this.props.history.push('/leads');
@@ -64,13 +60,21 @@ class CreateLeadComponent extends Component {
         this.setState({data_nascimento: event.target.value});
     }
 
-    changeTelefoneHandler= (event) => {
-        this.setState({telefone: event.target.value});
+    changeTelefoneHandler= (e) => {
+        const re = /^[0-9\b]+$/;
+
+        if (e.target.value === '' || re.test(e.target.value)) {
+            if(e.target.value.length <=11)
+                this.setState({telefone: e.target.value});
+        }
+        
     }
 
     cancel(){
         this.props.history.push('/leads');
     }
+
+    
 
     getTitle(){
         if(this.state.id === '_add'){
@@ -95,37 +99,36 @@ class CreateLeadComponent extends Component {
                 <br></br>
                 <div className="container">
                                 
-                                <div className = "card-body">
-                                    <form>
-                                        <div className = "form-group">
-                                            <label>NOME</label>
-                                            <input placeholder="Digite um Nome" name="nome" className="form-control" 
-                                                value={this.state.nome} onChange={this.changeNomeHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label>SOBRENOME</label>
-                                            <input placeholder="Digite um sobrenome" name="sobrenome" className="form-control" 
-                                                value={this.state.sobrenome} onChange={this.changeSobrenomeHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label>DATA DE NASCIMENTO</label>
-                                            <input type="date" name="data_nascimento" className="form-control" 
-                                                value={this.state.data_nascimento} onChange={this.changeDataNascimentoHandler}/>
-                                        </div>
+                    <div className = "card-body">
+                        <form>
+                            <div className = "form-group">
+                                <label>NOME</label>
+                                <input placeholder="Digite um Nome" name="nome" className="form-control" 
+                                    value={this.state.nome} onChange={this.changeNomeHandler}/>
+                            </div>
+                            <div className = "form-group">
+                                <label>SOBRENOME</label>
+                                <input placeholder="Digite um sobrenome" name="sobrenome" className="form-control" 
+                                    value={this.state.sobrenome} onChange={this.changeSobrenomeHandler}/>
+                            </div>
+                            <div className = "form-group">
+                                <label>DATA DE NASCIMENTO</label>
+                                <input type="date" name="data_nascimento" className="form-control" 
+                                    value={this.state.data_nascimento} onChange={this.changeDataNascimentoHandler}/>
+                            </div>
 
-                                        <div className = "form-group">
-                                            <label>TELEFONE</label>
-                                            <input placeholder="TELEFONE" name="telefone" className="form-control" 
-                                                value={this.state.telefone} onChange={this.changeTelefoneHandler}/>
-                                        </div>
+                            <div className = "form-group">
+                                <label>TELEFONE</label>
+                                <input placeholder="TELEFONE" name="telefone" className="form-control" 
+                                    value={this.state.telefone} min="10" max="11" onChange={this.changeTelefoneHandler}/>
+                            </div>
 
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateLead}>{this.getTitleBtn()}</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>VOLTAR</button>
-                                    </form>
-                                </div>
+                            <button className="btn btn-success" onClick={this.saveOrUpdateLead}>{this.getTitleBtn()}</button>
+                            <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>VOLTAR</button>
+                        </form>
+                    </div>
 
-
-                   </div>
+                </div>
             </div>
         )
     }

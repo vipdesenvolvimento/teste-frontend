@@ -42,7 +42,11 @@ class ListLeadComponent extends Component {
                     <h2 className="text-center">LISTAR LEADS</h2>
                 </div>
                 <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addLead}> Add Lead</button>
+                    <div className="col mt-2">
+                        <center>
+                            <button className="btn btn-primary" onClick={this.addLead}>Novo Lead</button>
+                        </center>
+                    </div>
                 </div>
                 <br></br>
                 <div className="container">

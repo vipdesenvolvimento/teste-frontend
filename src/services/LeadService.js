@@ -1,6 +1,8 @@
 import axios from 'axios';
+require('dotenv').config()
 
-const LEAD_API_BASE_URL = "http://localhost:8080/leads";
+const LEAD_API_BASE_URL = process.env.REACT_APP_LEAD_API_BASE_URL;
+console.log(LEAD_API_BASE_URL);
 
 class LeadService {
 
