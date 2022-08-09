@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.editar{
+	color: black;
+}
+.lista{
+	background-color: #ffedc9;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.excluir{
+	color: red;
+}
+
+.nome{
+	color: black;
+	font-weight: bold;
+	font-size: 1.3rem;
+}
+
+.header{
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #ffc75a;
+	color: #be5b00;
+}
